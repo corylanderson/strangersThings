@@ -21,7 +21,7 @@ const fetchRegisterUser = async (username, password) => {
     }),
   });
   const data = await result.json();
-  console.log(data)
+  console.log(data);
 
   return data;
 };
@@ -49,7 +49,7 @@ const fetchUserProfile = async (username, password) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       user: {
@@ -59,30 +59,32 @@ const fetchUserProfile = async (username, password) => {
     }),
   });
   const data = await result.json();
-  console.log(data)
+  console.log(data);
 
   return data;
 };
 
-// const createPost = async (postDetails, token) => {
-//   const result = await fetch(`${BaseURL}/users/me`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${token}`
-//     },
-//     body: JSON.stringify({
-//       user: {
-//         username,
-//         password,
-//       },
-//     }),
-//   });
-//   const data = await result.json();
-//   console.log(data)
+const createPost = async (postDetails, token) => {
+  const result = await fetch(`${BaseURL}/Posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: {
+        title: postDetails.title,
+        description: postDetails.description,
+        price: postDetails.price,
+        willDeliver: true,
+      },
+    }),
+  });
+  const data = await result.json();
+  console.log(data);
 
-//   return data;
-// };
+  return data;
+};
 
 // const updatePost = async (updateObj, token, postId) => {
 //   const result = await fetch(`${BaseURL}/users/me`, {
@@ -104,4 +106,4 @@ const fetchUserProfile = async (username, password) => {
 //   return data;
 // };
 
-module.exports = { fetchPostings, fetchLogin, fetchRegisterUser };
+module.exports = { fetchPostings, fetchLogin, fetchRegisterUser, createPost };

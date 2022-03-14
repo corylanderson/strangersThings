@@ -1,25 +1,34 @@
 import React, { useState } from "react";
 import { fetchRegisterUser } from "../api";
 
-const RegisterUser = () => {
-
+const RegisterUser = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  token,
+  setToken,
+}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userProfile = await fetchRegisterUser(e.target[0].value, e.target[1].value)
-    const setToken = userProfile.data.token
-    localStorage.setItem('token', setToken)
-    const getToken = localStorage.getItem('token')
-  }
-    const handleUsername = (e) => {
-      setUsername(e.target.value);
-      console.log(e.target.value);
-    };
-  
-    const handlePassword = (e) => {
-      setPassword(e.target.value);
-      console.log(e.target.value);
-    };
+    const userProfile = await fetchRegisterUser(
+      e.target[0].value,
+      e.target[1].value
+    );
+    console.log(userProfile);
+    let storageToken = userProfile.data.token;
+    console.log(storageToken);
+    localStorage.setItem("token", storageToken);
+    setToken(localStorage.getItem("token"));
+  };
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+    console.log(e.target.value);
+  };
 
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    console.log(e.target.value);
   };
 
   return (
@@ -27,8 +36,8 @@ const RegisterUser = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="username"  
-          onChange={handleUsername}       
+          placeholder="username"
+          onChange={handleUsername}
         ></input>
         <input
           type="text"

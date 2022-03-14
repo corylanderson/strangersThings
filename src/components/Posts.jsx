@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchPostings } from "../api";
-const Posts = () => {
-  const [postings, setPostings] = useState([]);
 
-  fetchPostings();
+const Posts = ({ postings, setPostings }) => {
+  useEffect(() => {
+    const getPosts = async () => {
+      const results = await fetchPostings();
+      setPostings(results.data.posts);
+    };
+    getPosts();
+  }, []);
 
   return (
     <div>
-      <h2>Posts</h2>
       {postings.map((posting) => {
-        <div key={posting._id}>
-          <h3>{posting.title}</h3>
-          <h3>{posting.description}</h3>
-          <h3>{posting.price}</h3>
-          <h3>{posting.location}</h3>
-        </div>;
+        return (
+          <div key={posting._id}>
+            <h2>{posting.title}</h2>
+            <h4>{posting.description}</h4>
+            <h4>{posting.price}</h4>
+            <h4>{posting.location}</h4>
+          </div>
+        );
       })}
     </div>
   );
