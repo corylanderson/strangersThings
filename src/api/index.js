@@ -8,7 +8,7 @@ const fetchPostings = async () => {
 };
 
 const fetchRegisterUser = async (username, password) => {
-  const result = await fetch(`${BaseURL}/register`, {
+  const result = await fetch(`${BaseURL}/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,12 +21,13 @@ const fetchRegisterUser = async (username, password) => {
     }),
   });
   const data = await result.json();
+  console.log(data)
 
   return data;
 };
 
 const fetchLogin = async (username, password) => {
-  const result = await fetch(`${BaseURL}/login`, {
+  const result = await fetch(`${BaseURL}/users/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,5 +43,65 @@ const fetchLogin = async (username, password) => {
 
   return data;
 };
+
+const fetchUserProfile = async (username, password) => {
+  const result = await fetch(`${BaseURL}/users/me`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      user: {
+        username,
+        password,
+      },
+    }),
+  });
+  const data = await result.json();
+  console.log(data)
+
+  return data;
+};
+
+// const createPost = async (postDetails, token) => {
+//   const result = await fetch(`${BaseURL}/users/me`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": `Bearer ${token}`
+//     },
+//     body: JSON.stringify({
+//       user: {
+//         username,
+//         password,
+//       },
+//     }),
+//   });
+//   const data = await result.json();
+//   console.log(data)
+
+//   return data;
+// };
+
+// const updatePost = async (updateObj, token, postId) => {
+//   const result = await fetch(`${BaseURL}/users/me`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": `Bearer ${token}`
+//     },
+//     body: JSON.stringify({
+//       user: {
+//         username,
+//         password,
+//       },
+//     }),
+//   });
+//   const data = await result.json();
+//   console.log(data)
+
+//   return data;
+// };
 
 module.exports = { fetchPostings, fetchLogin, fetchRegisterUser };
