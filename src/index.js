@@ -9,12 +9,13 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [postings, setPostings] = useState([]);
+  const [hasUser, setHasUser] = useState(false)
 
   return (
     <div className="app">
       <h1>Stranger's Things!!!</h1>
       {/* if user does not exist, render register user page. if user exists, render login page*/}
-      {token ? (
+      {hasUser ? (
         <Login
           username={username}
           setUsername={setUsername}
@@ -22,6 +23,8 @@ const App = () => {
           setPassword={setPassword}
           token={token}
           setToken={setToken}
+          hasUser={hasUser}
+          setHasUser={setHasUser}
         />
       ) : (
         <RegisterUser
@@ -31,6 +34,8 @@ const App = () => {
           setPassword={setPassword}
           token={token}
           setToken={setToken}
+          hasUser={hasUser}
+          setHasUser={setHasUser}
         />
       )}
 

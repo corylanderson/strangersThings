@@ -8,6 +8,8 @@ const Login = ({
   setPassword,
   token,
   setToken,
+  hasUser,
+  setHasUser
 }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +28,12 @@ const Login = ({
     setPassword(e.target.value);
     console.log(e.target.value);
   };
+
+  const hasAUser = (e) => {
+    setHasUser(false)
+    console.log('test')
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -40,6 +48,7 @@ const Login = ({
           onChange={handlePassword}
         ></input>
         <button type="submit">Submit</button>
+        <p onClick={hasAUser}>Make New Account</p>
       </form>
     </div>
   );

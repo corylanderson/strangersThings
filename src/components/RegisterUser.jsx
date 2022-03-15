@@ -8,7 +8,11 @@ const RegisterUser = ({
   setPassword,
   token,
   setToken,
+  hasUser,
+  setHasUser
 }) => {
+ 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userProfile = await fetchRegisterUser(
@@ -30,7 +34,10 @@ const RegisterUser = ({
     setPassword(e.target.value);
     console.log(e.target.value);
   };
-
+  const hasAUser = (e) => {
+    setHasUser(true)
+    console.log('test')
+  }
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -45,6 +52,7 @@ const RegisterUser = ({
           onChange={handlePassword}
         ></input>
         <button type="submit">Create User</button>
+        <p onClick={hasAUser}>Already have a Login?</p>
       </form>
     </div>
   );

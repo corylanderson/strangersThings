@@ -76,7 +76,7 @@ const createPost = async (postDetails, token) => {
         title: postDetails.title,
         description: postDetails.description,
         price: postDetails.price,
-        willDeliver: true,
+        willDeliver: postDetails.willDeliver,
       },
     }),
   });
@@ -86,24 +86,26 @@ const createPost = async (postDetails, token) => {
   return data;
 };
 
-// const updatePost = async (updateObj, token, postId) => {
-//   const result = await fetch(`${BaseURL}/users/me`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${token}`
-//     },
-//     body: JSON.stringify({
-//       user: {
-//         username,
-//         password,
-//       },
-//     }),
-//   });
-//   const data = await result.json();
-//   console.log(data)
+const updatePost = async (updateObj, token, postId) => {
+  const result = await fetch(`${BaseURL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      user: {
+        title: updateObj.title,
+        description: updateObj.description,
+        price: updateObj.price,
+        willDeliver: updateObj.willDeliver,
+      },
+      }),
+    })
+  const data = await result.json();
+  console.log(data)
 
-//   return data;
-// };
+  return data;
+};
 
-module.exports = { fetchPostings, fetchLogin, fetchRegisterUser, createPost };
+module.exports = { fetchPostings, fetchLogin, fetchRegisterUser, createPost, updatePost };

@@ -16,9 +16,9 @@ const Posts = ({ postings, setPostings }) => {
         return (
           <div key={posting._id}>
             <h2>{posting.title}</h2>
-            <h4>{posting.description}</h4>
-            <h4>{posting.price}</h4>
-            <h4>{posting.location}</h4>
+            <h4>Description: {posting.description}</h4>
+            <h4>Price :{posting.price}</h4>
+            <h4>Location: {posting.location}</h4>
           </div>
         );
       })}

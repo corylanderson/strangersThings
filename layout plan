@@ -1,0 +1,43 @@
+create register page
+    form for username and password
+    submit button
+    when submit button is pressed, run function to post inputted username and password to api
+    receive token from api and store in localstorage
+    if e.target.value.length of password form is >= x amount then submit, otherwise return alert not meeting minimum requirements 
+
+create login page
+    form for username and password
+    submit button
+    when submit button is pressed, run function to post inputted username and password to api
+    use stored token from api and store to authenticate to api
+
+figure out routes
+
+create logout bottom (localstorage.removeitem("token"))
+
+
+create postings page (unauthenticated)
+    ternary on showing which post view to show when authenticated in Posts component
+
+authenticated post view
+    needs create, delete, edit buttons on posts that will bring to create post view
+
+boolean button for if login exists, show login, else show register user.
+    set state default to false on button to change to true. (already have a user? click here...etc. dont have a user? click here...etc)
+    use instead of token ternary
+    after login, use token ternary for after login based on logged in state (nested ternary. first check is user existence, then logged in state.)
+    create logged in homepage component to show in logged in state
+
+
+
+When routes are set up:
+    instead of ternary(s), if logged in state is true, route page to logged in user route  (https://strangerthings.com/user/homepage)
+        (or if user sends url for logged in user route and logged in state is not true, send alert "must be logged in" or redirect to login page automatically)
+        if logged in state is not true, route page to login page.  (https://strangerthings.com/login)
+        if user needs to create an account, route page to create user page.  (https://strangerthings.com/createuser)
+        if user already has an account, route page to login page. (https://strangerthings.com/login)
+        if user is logged in and wants to see posts, route page to user's posts.  (https://strangerthings.com/user/posts)
+        if user is not logged in and wants to see posts, route page to general posts. (https://strangerthings.com/posts)
+        if user is logged in and wants to create a post, route page to create post.  (https://strangerthings.com/user/createpost)
+            include button to log in or sign up on this page if user would like to access more features.
+        if user clicks log out, set logged in state to 'false' which will remove the token saved in localstorage, then route to login page. (https://strangerthings.com/login)
