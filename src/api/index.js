@@ -44,19 +44,13 @@ const fetchLogin = async (username, password) => {
   return data;
 };
 
-const fetchUserProfile = async (username, password) => {
+const fetchUserProfile = async (token) => {
   const result = await fetch(`${BaseURL}/users/me`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      user: {
-        username,
-        password,
-      },
-    }),
   });
   const data = await result.json();
   console.log(data);
@@ -91,7 +85,7 @@ const updatePost = async (updateObj, token, postId) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       user: {
@@ -100,12 +94,19 @@ const updatePost = async (updateObj, token, postId) => {
         price: updateObj.price,
         willDeliver: updateObj.willDeliver,
       },
-      }),
-    })
+    }),
+  });
   const data = await result.json();
-  console.log(data)
+  console.log(data);
 
   return data;
 };
 
-module.exports = { fetchPostings, fetchLogin, fetchRegisterUser, createPost, updatePost };
+module.exports = {
+  fetchPostings,
+  fetchLogin,
+  fetchRegisterUser,
+  createPost,
+  updatePost,
+  fetchUserProfile,
+};

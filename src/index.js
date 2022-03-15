@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Login, RegisterUser, Posts, CreatePost } from "./components";
-import CreatePosts from "./components/CreatePosts";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  Login,
+  RegisterUser,
+  Posts,
+  Logout,
+  CreatePosts,
+  Profile,
+} from "./components";
 
 const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [postings, setPostings] = useState([]);
-  const [hasUser, setHasUser] = useState(false)
+  const [hasUser, setHasUser] = useState(false);
 
   return (
     <div className="app">
@@ -38,10 +44,19 @@ const App = () => {
           setHasUser={setHasUser}
         />
       )}
+      {token ? <Logout /> : null}
 
-      <CreatePosts token={token} setToken={setToken} />
-
-      {token ? <Posts postings={postings} setPostings={setPostings} /> : null}
+      <Switch>
+        <Route path="/posts">
+          <Posts postings={postings} setPostings={setPostings} />
+        </Route>
+        <Route path="/createPost">
+          <CreatePosts />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
+        </Route>
+      </Switch>
     </div>
   );
 };
