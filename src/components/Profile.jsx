@@ -1,32 +1,25 @@
-import React from "react";
-import { fetchUserProfile } from "../api";
+import React, { useState, useEffect } from "react";
 
-const Profile = ({ token, setToken }) => {
+
+const Profile = ({ token, setToken, profile, setProfile}) => {
   console.log(token, "top level profile");
-  const profileResult = async () => {
-    const results = await fetchUserProfile(token);
-    console.log(results);
-    let userMessages = await results.data.messages;
-    let userPosts = await results.data.posts;
-    console.log(results, "this is results from profile");
-  };
-  profileResult();
-  console.log("profile");
+
+  console.log(profile);
   return (
     <div>
-      {/* {userMessages.length
-        ? userMessages.map((message) => {
-            return;
-            (<div>{message}</div>), (<div></div>), (<div></div>);
+      {profile.messages.length > 0
+        ? profile.messages.map((message) => {
+            return
+            <div>{message}</div>
           })
-        : null}
+        : <p>No messages</p>}
 
-      {userPosts.length
-        ? userPosts.map((post) => {
-            return;
-            <div>{post}</div>;
+      {profile.posts.length > 0
+        ? profile.posts.map((post) => {
+            return
+            <div>{post}</div>
           })
-        : null} */}
+        : <p>No Posts</p>}
     </div>
   );
 };

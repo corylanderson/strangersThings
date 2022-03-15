@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { fetchRegisterUser } from "../api";
+import { Link } from "react-router-dom";
 
 const RegisterUser = ({
   username,
@@ -32,10 +33,7 @@ const RegisterUser = ({
     setPassword(e.target.value);
     console.log(e.target.value);
   };
-  const hasAUser = (e) => {
-    setHasUser(true);
-    console.log("test");
-  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -50,7 +48,7 @@ const RegisterUser = ({
           onChange={handlePassword}
         ></input>
         <button type="submit">Create User</button>
-        <p onClick={hasAUser}>Already have a Login?</p>
+        <Link to="./login">Already have a Login?</Link>
       </form>
     </div>
   );

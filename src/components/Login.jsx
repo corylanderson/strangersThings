@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { fetchLogin } from "../api";
+import { Link } from "react-router-dom";
 
 const Login = ({
   username,
@@ -10,7 +11,9 @@ const Login = ({
   setToken,
   hasUser,
   setHasUser,
+  setIsLoggedIn
 }) => {
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userProfile = await fetchLogin(e.target[0].value, e.target[1].value),
@@ -18,6 +21,7 @@ const Login = ({
     let localToken = localStorage.setItem("token", token);
     const getToken = localStorage.getItem("token");
     setToken(getToken);
+    setIsLoggedIn(true)
   };
 
   const handleUsername = (e) => {
@@ -28,11 +32,6 @@ const Login = ({
   const handlePassword = (e) => {
     setPassword(e.target.value);
     console.log(e.target.value);
-  };
-
-  const hasAUser = (e) => {
-    setHasUser(false);
-    console.log("test");
   };
 
   return (
@@ -49,7 +48,7 @@ const Login = ({
           onChange={handlePassword}
         ></input>
         <button type="submit">Submit</button>
-        <p onClick={hasAUser}>Make New Account</p>
+        <Link to="./createUser">Make New Account</Link>
       </form>
     </div>
   );
