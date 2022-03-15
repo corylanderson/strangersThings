@@ -54,7 +54,7 @@ const App = () => {
           <CreatePosts />
         </Route>
         <Route exact path="/profile">
-          <Profile />
+          <Profile token={token} setToken={setToken} />
         </Route>
       </Switch>
     </div>

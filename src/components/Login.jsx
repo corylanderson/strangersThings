@@ -9,14 +9,15 @@ const Login = ({
   token,
   setToken,
   hasUser,
-  setHasUser
+  setHasUser,
 }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userProfile = await fetchLogin(e.target[0].value, e.target[1].value),
-      token = userProfile.data.token;
+      token = await userProfile.data.token;
     let localToken = localStorage.setItem("token", token);
     const getToken = localStorage.getItem("token");
+    setToken(getToken);
   };
 
   const handleUsername = (e) => {
@@ -30,9 +31,9 @@ const Login = ({
   };
 
   const hasAUser = (e) => {
-    setHasUser(false)
-    console.log('test')
-  }
+    setHasUser(false);
+    console.log("test");
+  };
 
   return (
     <div>

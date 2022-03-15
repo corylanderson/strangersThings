@@ -45,6 +45,7 @@ const fetchLogin = async (username, password) => {
 };
 
 const fetchUserProfile = async (token) => {
+  console.log(token, "this is a token");
   const result = await fetch(`${BaseURL}/users/me`, {
     method: "GET",
     headers: {
@@ -53,7 +54,7 @@ const fetchUserProfile = async (token) => {
     },
   });
   const data = await result.json();
-  console.log(data);
+  console.log(data, "this is from your API");
 
   return data;
 };

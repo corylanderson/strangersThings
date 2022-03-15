@@ -9,10 +9,8 @@ const RegisterUser = ({
   token,
   setToken,
   hasUser,
-  setHasUser
+  setHasUser,
 }) => {
- 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userProfile = await fetchRegisterUser(
@@ -20,8 +18,8 @@ const RegisterUser = ({
       e.target[1].value
     );
     console.log(userProfile);
-    let storageToken = userProfile.data.token;
-    console.log(storageToken);
+    let storageToken = await userProfile.data.token;
+    console.log(storageToken, "from inside registerUser");
     localStorage.setItem("token", storageToken);
     setToken(localStorage.getItem("token"));
   };
@@ -35,9 +33,9 @@ const RegisterUser = ({
     console.log(e.target.value);
   };
   const hasAUser = (e) => {
-    setHasUser(true)
-    console.log('test')
-  }
+    setHasUser(true);
+    console.log("test");
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
