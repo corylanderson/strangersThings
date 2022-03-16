@@ -1,12 +1,18 @@
 import react from "react";
 
-const Logout = () => {
+const Logout = ({ setIsLoggedIn, isLoggedIn, token, setToken }) => {
   const logoutUser = () => {
     localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setToken(localstorage.removeitem("token"));
   };
 
   return (
-    <form onSubmit={logoutUser}>
+    <form
+      onSubmit={() => {
+        logoutUser();
+      }}
+    >
       <button type="submit">Logout</button>
     </form>
   );

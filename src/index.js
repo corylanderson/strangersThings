@@ -15,6 +15,7 @@ import {
   CreatePosts,
   Profile,
   Navbar,
+  EditSinglePost,
 } from "./components";
 
 const App = () => {
@@ -26,14 +27,20 @@ const App = () => {
   const [profile, setProfile] = useState("");
 
   useEffect(() => {
-    const profileResult = async () => {
-      const results = await fetchUserProfile(localStorage.getItem("token"));
-      console.log(JSON.stringify(results));
+    const currentToken = localStorage.getItem("token");
 
-      console.log(results.data);
-      setProfile(results.data);
-    };
-    profileResult();
+    try {
+      if (currentToken) {
+        const profileResult = async () => {
+          const results = await fetchUserProfile(currentToken);
+          console.log(JSON.stringify(results));
+          setIsLoggedIn(true);
+          console.log(results.data);
+          setProfile(results.data);
+        };
+        profileResult();
+      }
+    } catch (error) {}
   }, []);
 
   return (
@@ -41,11 +48,23 @@ const App = () => {
       <Navbar />
       <h1>Stranger's Things!!!</h1>
 
-      {/* {isLoggedIn ? <Redirect to="/profile" /> : <Redirect to="/login" />} */}
+      {isLoggedIn ? (
+        <Logout
+          token={token}
+          setToken={setToken}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      ) : null}
 
       <Switch>
         <Route path="/posts">
-          <Posts postings={postings} setPostings={setPostings} />
+          <Posts
+            postings={postings}
+            setPostings={setPostings}
+            profile={profile}
+            setProfile={setProfile}
+          />
         </Route>
         <Route path="/createPost">
           <CreatePosts />
@@ -78,6 +97,9 @@ const App = () => {
             setToken={setToken}
             setIsLoggedIn={setIsLoggedIn}
           />
+        </Route>
+        <Route path="/editPost">
+          <EditSinglePost />
         </Route>
       </Switch>
     </div>

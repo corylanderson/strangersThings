@@ -3,7 +3,7 @@ import { fetchPostings } from "../api";
 import { CreatePosts } from "./";
 import { Link } from "react-router-dom";
 
-const Posts = ({ postings, setPostings }) => {
+const Posts = ({ postings, setPostings, profile, setProfile }) => {
   useEffect(() => {
     const getPosts = async () => {
       const results = await fetchPostings();
@@ -11,6 +11,11 @@ const Posts = ({ postings, setPostings }) => {
     };
     getPosts();
   }, []);
+
+  const editPost = () => {
+    return;
+  };
+
   // const showCreatePostPage = (e) => {
   // e.preventDefault()
 
@@ -29,8 +34,16 @@ const Posts = ({ postings, setPostings }) => {
             <h4>Description: {posting.description}</h4>
             <h4>Price :{posting.price}</h4>
             <h4>Location: {posting.location}</h4>
-            <button type="submit">Edit Post</button>
-            <button type="submit">Delete Post</button>
+            {posting.author._id !== profile._id ? null : (
+              <Link to="editPost">
+                <button value={posting._id} type="submit">
+                  Edit Post
+                </button>{" "}
+              </Link>
+            )}
+            {posting.author._id !== profile._id ? null : (
+              <button type="submit">Delete Post</button>
+            )}
           </div>
         );
       })}
