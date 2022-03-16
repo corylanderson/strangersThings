@@ -1,84 +1,87 @@
-import React, { useState }  from "react";
-import { createPost } from "../api"
+import React, { useState } from "react";
+import { createPost } from "../api";
 
-const CreatePosts = ({token, setToken}) => {
+const CreatePosts = ({ token, setToken }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [location, setLocation] = useState("");
+  const [willDeliver, setWillDeliver] = useState(false);
 
-  
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [price, setPrice] = useState("")
-  const [location, setLocation] = useState("")
-  const [willDeliverCheck, setWillDeliverCheck] = useState(false)
-
-  
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
-    createPost(postDetails, token)
-}
+    e.preventDefault();
+    const postDetails = {
+      title,
+      description,
+      price,
+      location,
+      willDeliver,
+    };
+    console.log(postDetails);
+    const creatingPost = async () => {
+      await createPost(postDetails, localStorage.getItem("token"));
+    };
+    creatingPost();
+  };
 
-const handleTitle = () => {
-  setTitle(e.target.value[0])
-}
-const handleDescription = () => {
-  setDescription(e.target.value[1])
-}
-const handlePrice = () => {
-  setPrice(e.target.value[2])
-}
-const handleLocation = () => {
-  setLocation(e.target.value[3])
-}
-const handleWillDeliver = () => {
-  
-  setWillDeliverCheck(true)
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+    console.log(title);
+  };
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+  const handlePrice = (e) => {
+    setPrice(e.target.value);
+  };
+  const handleLocation = (e) => {
+    setLocation(e.target.value);
+  };
+  const handleWillDeliver = () => {
+    setWillDeliver(!willDeliver);
+  };
 
-}
-
-
-
-    return (
-    
-    
+  return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
+          value={title}
           type="text"
           placeholder="title"
           onChange={handleTitle}
         ></input>
-        
+
         <input
+          value={description}
           type="text"
           placeholder="description"
           onChange={handleDescription}
         ></input>
-        
-        <input 
-        type='text'
-        placeholder= 'price'
-        onChange={handlePrice}
+
+        <input
+          value={price}
+          type="text"
+          placeholder="price"
+          onChange={handlePrice}
         ></input>
-        
-        <input 
-        type='text'
-        placeholder= 'location'
-        onChange={handleLocation}
+
+        <input
+          value={location}
+          type="text"
+          placeholder="location"
+          onChange={handleLocation}
         ></input>
-        
-        <input 
-        type='checkbox'
-        onChange={handleWillDeliver}
+
+        <input
+          value={willDeliver}
+          type="checkbox"
+          onChange={handleWillDeliver}
         ></input>
-        
+
         <button type="submit">Create Posting</button>
       </form>
     </div>
-    
-        
-    )
-}
-
-
+  );
+};
 
 export default CreatePosts;

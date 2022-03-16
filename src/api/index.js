@@ -60,7 +60,7 @@ const fetchUserProfile = async (token) => {
 };
 
 const createPost = async (postDetails, token) => {
-  const result = await fetch(`${BaseURL}/Posts`, {
+  const result = await fetch(`${BaseURL}/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,6 +71,7 @@ const createPost = async (postDetails, token) => {
         title: postDetails.title,
         description: postDetails.description,
         price: postDetails.price,
+        location: postDetails.location,
         willDeliver: postDetails.willDeliver,
       },
     }),
