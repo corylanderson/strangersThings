@@ -1,31 +1,28 @@
 import React, { useState } from "react";
 import { updatePost } from "../api";
+import { useLocation } from "react-router-dom";
 
-const EditSinglePost = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [location, setLocation] = useState("");
-  const [willDeliver, setWillDeliver] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const postDetails = {
-      title,
-      description,
-      price,
-      location,
-      willDeliver,
-    };
-    console.log(postDetails);
-    const updatePost = async () => {
-      await updatePost(postDetails, localStorage.getItem("token"));
-    };
-    updatePost();
-  };
+const EditSinglePost = ({postings, setPostings}) => {
+  
+  //const [formState, setFormState] = useState({title: "", description: ""})
+  
+  const locationState = useLocation()
+  const {post} = locationState.state
+  const [title, setTitle] = useState(post.title);
+  const [description, setDescription] = useState(post.description);
+  const [price, setPrice] = useState(post.price);
+  const [location, setLocation] = useState(post.location);
+  const [willDeliver, setWillDeliver] = useState(post.willDeliver);
 
+  
+
+  //useEffect()
+
+
+  
   const handleTitle = (e) => {
+    // setFormState({...formState, e.target.name: e.target.value})
     setTitle(e.target.value);
-    console.log(title);
   };
   const handleDescription = (e) => {
     setDescription(e.target.value);
@@ -39,11 +36,27 @@ const EditSinglePost = () => {
   const handleWillDeliver = () => {
     setWillDeliver(!willDeliver);
   };
-
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const updatedPostDetails = {
+      title,
+      description,
+      price,
+      location,
+      willDeliver,
+    };
+  
+    const updatingPost = async () => {
+      await updatePost(updatedPostDetails, localStorage.getItem("token"), post._id);
+    };
+    updatingPost();
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
+        
           value={title}
           type="text"
           placeholder="title"

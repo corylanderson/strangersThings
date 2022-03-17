@@ -72,7 +72,7 @@ const createPost = async (postDetails, token) => {
         description: postDetails.description,
         price: postDetails.price,
         location: postDetails.location,
-        willDeliver: postDetails.willDeliver,
+        willDeliver: postDetails.willDeliver
       },
     }),
   });
@@ -83,17 +83,19 @@ const createPost = async (postDetails, token) => {
 };
 
 const updatePost = async (updateObj, token, postId) => {
-  const result = await fetch(`${BaseURL}/users/me`, {
+  console.log(updateObj, "this is from updatePost api")
+  const result = await fetch(`${BaseURL}/posts/${postId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      user: {
+      post: {
         title: updateObj.title,
         description: updateObj.description,
         price: updateObj.price,
+        location: updateObj.location,
         willDeliver: updateObj.willDeliver,
       },
     }),

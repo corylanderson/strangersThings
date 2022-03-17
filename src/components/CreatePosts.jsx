@@ -17,7 +17,7 @@ const CreatePosts = ({ token, setToken }) => {
       location,
       willDeliver,
     };
-    console.log(postDetails);
+
     const creatingPost = async () => {
       await createPost(postDetails, localStorage.getItem("token"));
     };
@@ -26,7 +26,7 @@ const CreatePosts = ({ token, setToken }) => {
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
-    console.log(title);
+
   };
   const handleDescription = (e) => {
     setDescription(e.target.value);

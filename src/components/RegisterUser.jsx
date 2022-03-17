@@ -18,20 +18,19 @@ const RegisterUser = ({
       e.target[0].value,
       e.target[1].value
     );
-    console.log(userProfile);
     let storageToken = await userProfile.data.token;
-    console.log(storageToken, "from inside registerUser");
+
     localStorage.setItem("token", storageToken);
     setToken(localStorage.getItem("token"));
   };
   const handleUsername = (e) => {
     setUsername(e.target.value);
-    console.log(e.target.value);
+
   };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    console.log(e.target.value);
+
   };
 
   return (

@@ -4,6 +4,7 @@ import { CreatePosts } from "./";
 import { Link } from "react-router-dom";
 
 const Posts = ({ postings, setPostings, profile, setProfile }) => {
+  
   useEffect(() => {
     const getPosts = async () => {
       const results = await fetchPostings();
@@ -35,7 +36,8 @@ const Posts = ({ postings, setPostings, profile, setProfile }) => {
             <h4>Price :{posting.price}</h4>
             <h4>Location: {posting.location}</h4>
             {posting.author._id !== profile._id ? null : (
-              <Link to="editPost">
+              <Link to={{pathname: "/editPost", 
+              state: {post: posting}}}>
                 <button value={posting._id} type="submit">
                   Edit Post
                 </button>{" "}

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Profile = ({ token, setToken, profile, setProfile }) => {
-  console.log(token, "top level profile");
 
-  console.log(profile);
   return (
     <div>
       {profile && profile.messages.length > 0 ? (
