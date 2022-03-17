@@ -7,7 +7,6 @@ const EditSinglePost = () => {
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   const [willDeliver, setWillDeliver] = useState(false);
-  console.log(post._id, "here is the posting._id");
   const handleSubmit = (e) => {
     e.preventDefault();
     const postDetails = {
