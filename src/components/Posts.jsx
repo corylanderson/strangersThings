@@ -26,7 +26,7 @@ const Posts = ({ postings, setPostings, profile, setProfile }) => {
   return (
     <div>
       <Link to="createPost">
-        <button type="submit">Create Post</button>{" "}
+        <button type="submit">Create Post</button>
       </Link>
       {postings.map((posting) => {
         return (
@@ -40,7 +40,7 @@ const Posts = ({ postings, setPostings, profile, setProfile }) => {
               state: {post: posting}}}>
                 <button value={posting._id} type="submit">
                   Edit Post
-                </button>{" "}
+                </button>
               </Link>
             )}
             {posting.author._id !== profile._id ? null : (

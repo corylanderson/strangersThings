@@ -16,6 +16,7 @@ import {
   Profile,
   Navbar,
   EditSinglePost,
+  Search
 } from "./components";
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
   return (
     <div className="app">
       <Navbar />
+      <Search />
       <h1>Stranger's Things!!!</h1>
 
       {isLoggedIn ? (

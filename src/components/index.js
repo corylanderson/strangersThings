@@ -6,3 +6,4 @@ export { default as CreatePosts } from "./CreatePosts";
 export { default as Profile } from "./Profile";
 export { default as Navbar } from "./Navbar";
 export { default as EditSinglePost } from "./EditSinglePost";
+export { default as Search } from "./Search";

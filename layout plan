@@ -41,3 +41,9 @@ When routes are set up:
         if user is logged in and wants to create a post, route page to create post.  (https://strangerthings.com/user/createpost)
             include button to log in or sign up on this page if user would like to access more features.
         if user clicks log out, set logged in state to 'false' which will remove the token saved in localstorage, then route to login page. (https://strangerthings.com/login)
+
+search component
+
+delete button functionality
+
+messages receive and send (POST and GET)
