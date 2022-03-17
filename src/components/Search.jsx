@@ -16,7 +16,7 @@ const Search = ({ search, setSearch, postings, setPostings }) => {
   console.log(searchResults);
   return (
     <div>
-      <form action="/" method="get">
+      <form method="get">
         <label htmlFor="header-search">
           <span className="visually-hidden">Search Postings</span>
         </label>

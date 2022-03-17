@@ -1,0 +1,30 @@
+/* * {
+  display: flex;
+  flex-direction: row;
+}
+.post {
+  flex-direction: column;
+}
+
+#app {
+  flex-direction: column;
+}
+
+#postMain {
+  flex-direction: column;
+  margin-top: 10px;
+  border: solid black 2px;
+  border-radius: 10px;
+}
+.nav-bar {
+  flex-direction: row;
+  margin-top: 10px;
+  border: solid blue 2px;
+  border-radius: 10px;
+}
+#app-control {
+  flex-direction: row;
+  margin-top: 10px;
+  border: solid red 2px;
+  border-radius: 10px;
+} */

@@ -46,25 +46,26 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
-      <Navbar />
-      <Search
-        search={search}
-        setSearch={setSearch}
-        postings={postings}
-        setPostings={setPostings}
-      />
-      <h1>Stranger's Things!!!</h1>
-
-      {isLoggedIn ? (
-        <Logout
-          token={token}
-          setToken={setToken}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
+    <div id="app">
+      <div id="app-control">
+        <Navbar />
+        <Search
+          search={search}
+          setSearch={setSearch}
+          postings={postings}
+          setPostings={setPostings}
         />
-      ) : null}
+        <h1>Stranger's Things!!!</h1>
 
+        {isLoggedIn ? (
+          <Logout
+            token={token}
+            setToken={setToken}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+          />
+        ) : null}
+      </div>
       <Switch>
         <Route path="/posts">
           <Posts
