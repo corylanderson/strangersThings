@@ -16,7 +16,7 @@ import {
   Profile,
   Navbar,
   EditSinglePost,
-  Search
+  Search,
 } from "./components";
 
 const App = () => {
@@ -26,6 +26,7 @@ const App = () => {
   const [postings, setPostings] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const currentToken = localStorage.getItem("token");
@@ -47,7 +48,12 @@ const App = () => {
   return (
     <div className="app">
       <Navbar />
-      <Search />
+      <Search
+        search={search}
+        setSearch={setSearch}
+        postings={postings}
+        setPostings={setPostings}
+      />
       <h1>Stranger's Things!!!</h1>
 
       {isLoggedIn ? (

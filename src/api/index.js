@@ -72,7 +72,7 @@ const createPost = async (postDetails, token) => {
         description: postDetails.description,
         price: postDetails.price,
         location: postDetails.location,
-        willDeliver: postDetails.willDeliver
+        willDeliver: postDetails.willDeliver,
       },
     }),
   });
@@ -83,7 +83,6 @@ const createPost = async (postDetails, token) => {
 };
 
 const updatePost = async (updateObj, token, postId) => {
-  console.log(updateObj, "this is from updatePost api")
   const result = await fetch(`${BaseURL}/posts/${postId}`, {
     method: "PATCH",
     headers: {
@@ -106,6 +105,20 @@ const updatePost = async (updateObj, token, postId) => {
   return data;
 };
 
+const deletePost = async (postId, token) => {
+  const result = await fetch(`${BaseURL}/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await result.json();
+  console.log(data);
+
+  return data;
+};
+
 module.exports = {
   fetchPostings,
   fetchLogin,
@@ -113,4 +126,5 @@ module.exports = {
   createPost,
   updatePost,
   fetchUserProfile,
+  deletePost,
 };

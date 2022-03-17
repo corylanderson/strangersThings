@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { fetchPostings } from "../api";
-import { CreatePosts } from "./";
+import { fetchPostings, deletePost } from "../api";
 import { Link } from "react-router-dom";
 
 const Posts = ({ postings, setPostings, profile, setProfile }) => {
-  
+  console.log(postings);
   useEffect(() => {
     const getPosts = async () => {
       const results = await fetchPostings();
@@ -13,16 +12,21 @@ const Posts = ({ postings, setPostings, profile, setProfile }) => {
     getPosts();
   }, []);
 
-  const editPost = () => {
-    return;
-  };
-
   // const showCreatePostPage = (e) => {
   // e.preventDefault()
 
   // return (<Route
   //   CreatePosts />)
   // }
+  const deletingPosts = async (e) => {
+    const result = await deletePost(
+      localStorage.getItem("token"),
+      e.target.value
+    );
+    const results = await fetchPostings();
+    setPostings(results.data.posts);
+  };
+  console.log(localStorage.getItem("token"));
   return (
     <div>
       <Link to="createPost">
@@ -36,15 +40,16 @@ const Posts = ({ postings, setPostings, profile, setProfile }) => {
             <h4>Price :{posting.price}</h4>
             <h4>Location: {posting.location}</h4>
             {posting.author._id !== profile._id ? null : (
-              <Link to={{pathname: "/editPost", 
-              state: {post: posting}}}>
+              <Link to={{ pathname: "/editPost", state: { post: posting } }}>
                 <button value={posting._id} type="submit">
                   Edit Post
                 </button>
               </Link>
             )}
             {posting.author._id !== profile._id ? null : (
-              <button type="submit">Delete Post</button>
+              <button value={posting._id} type="submit" onClick={deletingPosts}>
+                Delete Post
+              </button>
             )}
           </div>
         );
