@@ -6,11 +6,11 @@ const Search = ({ postings, setFilteredPosts }) => {
 
   //searchResults will equal a filter of postings that matches the search input. if true, these posts will render. if false, these posts will not render
 
-  const handleSubmit = () => {
-    console.log(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const searchResults = postings.filter((posting) => {
       const lowerTitle = posting.title.toLowerCase();
-      const lowerDescription = postings.description.toLowerCase();
+      const lowerDescription = posting.description.toLowerCase();
       const lowerSearch = search.toLowerCase();
       if (lowerTitle.includes(lowerSearch)) {
         return true;

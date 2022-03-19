@@ -17,19 +17,18 @@ const Profile = ({ token, setToken, profile, setProfile }) => {
         profile.posts.map((post) => {
           return (
             <>
-            <div key={post._id}>
-              <h2>{post.title}</h2>
-              <h4>Description: {post.description}</h4>
-              <h4>Price :{post.price}</h4>
-              <h4>Location: {post.location}</h4>
-            </div>
-            <Link to={{pathname: "/editPost", 
-            state: {post: post}}}>
-              <button value={post._id} type="submit">
-                Edit Post
-              </button>
-            </Link>
-            <button type="submit">Delete Post</button>
+              <div key={post._id}>
+                <h2>{post.title}</h2>
+                <h4>Description: {post.description}</h4>
+                <h4>Price :{post.price}</h4>
+                <h4>Location: {post.location}</h4>
+              </div>
+              <Link to={{ pathname: "/editPost", state: { post: post } }}>
+                <button value={post._id} type="submit">
+                  Edit Post
+                </button>
+              </Link>
+              <button type="submit">Delete Post</button>
             </>
           );
         })
