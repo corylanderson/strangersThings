@@ -21,7 +21,6 @@ const fetchRegisterUser = async (username, password) => {
     }),
   });
   const data = await result.json();
-  console.log(data);
 
   return data;
 };
@@ -45,7 +44,6 @@ const fetchLogin = async (username, password) => {
 };
 
 const fetchUserProfile = async (token) => {
-  console.log(token, "this is a token");
   const result = await fetch(`${BaseURL}/users/me`, {
     method: "GET",
     headers: {
@@ -54,7 +52,6 @@ const fetchUserProfile = async (token) => {
     },
   });
   const data = await result.json();
-  console.log(data, "this is from your API");
 
   return data;
 };
@@ -77,7 +74,6 @@ const createPost = async (postDetails, token) => {
     }),
   });
   const data = await result.json();
-  console.log(data);
 
   return data;
 };
@@ -100,7 +96,6 @@ const updatePost = async (updateObj, token, postId) => {
     }),
   });
   const data = await result.json();
-  console.log(data);
 
   return data;
 };
@@ -114,7 +109,6 @@ const deletePost = async (postId, token) => {
     },
   });
   const data = await result.json();
-  console.log(data);
 
   return data;
 };

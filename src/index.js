@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { fetchUserProfile } from "./api";
+import { fetchUserProfile, fetchPostings } from "./api";
 import {
   Login,
   RegisterUser,
@@ -26,7 +26,7 @@ const App = () => {
   const [postings, setPostings] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState(postings);
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   useEffect(() => {
     const currentToken = localStorage.getItem("token");
@@ -35,15 +35,25 @@ const App = () => {
       if (currentToken) {
         const profileResult = async () => {
           const results = await fetchUserProfile(currentToken);
-          console.log(JSON.stringify(results));
           setIsLoggedIn(true);
-          console.log(results.data);
           setProfile(results.data);
         };
         profileResult();
       }
     } catch (error) {}
   }, []);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const results = await fetchPostings();
+      setPostings(results.data.posts);
+    };
+    getPosts();
+  }, []);
+
+  useEffect(() => {
+    setFilteredPosts(postings);
+  }, [postings]);
 
   return (
     <div id="app">

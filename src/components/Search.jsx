@@ -3,21 +3,15 @@ import { fetchPostings } from "../api";
 
 const Search = ({ postings, setFilteredPosts }) => {
   const [search, setSearch] = useState("");
-  useEffect(() => {
-    const getPosts = async () => {
-      const results = await fetchPostings();
-      setPostings(results.data.posts);
-    };
-    getPosts();
-  }, []);
+
   //searchResults will equal a filter of postings that matches the search input. if true, these posts will render. if false, these posts will not render
 
   const handleSubmit = () => {
+    console.log(true);
     const searchResults = postings.filter((posting) => {
       const lowerTitle = posting.title.toLowerCase();
       const lowerDescription = postings.description.toLowerCase();
       const lowerSearch = search.toLowerCase();
-
       if (lowerTitle.includes(lowerSearch)) {
         return true;
       } else if (lowerDescription.includes(lowerSearch)) {
@@ -27,6 +21,7 @@ const Search = ({ postings, setFilteredPosts }) => {
       }
     });
     setFilteredPosts(searchResults);
+    console.log(searchResults, "this is search results from handle submit");
   };
   return (
     <div>
