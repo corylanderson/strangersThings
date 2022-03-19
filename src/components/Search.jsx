@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchPostings } from "../api";
 
-const Search = ({ search, setSearch, postings, setPostings }) => {
+const Search = ({ postings, setFilteredPosts }) => {
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const getPosts = async () => {
       const results = await fetchPostings();
@@ -9,14 +10,27 @@ const Search = ({ search, setSearch, postings, setPostings }) => {
     };
     getPosts();
   }, []);
+  //searchResults will equal a filter of postings that matches the search input. if true, these posts will render. if false, these posts will not render
 
-  const searchResults = postings.filter((posting) =>
-    posting.title.toLowerCase().includes(search.toLowerCase())
-  );
-  console.log(searchResults);
+  const handleSubmit = () => {
+    const searchResults = postings.filter((posting) => {
+      const lowerTitle = posting.title.toLowerCase();
+      const lowerDescription = postings.description.toLowerCase();
+      const lowerSearch = search.toLowerCase();
+
+      if (lowerTitle.includes(lowerSearch)) {
+        return true;
+      } else if (lowerDescription.includes(lowerSearch)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    setFilteredPosts(searchResults);
+  };
   return (
     <div>
-      <form method="get">
+      <form onSubmit={handleSubmit} method="get">
         <label htmlFor="header-search">
           <span className="visually-hidden">Search Postings</span>
         </label>
@@ -29,33 +43,8 @@ const Search = ({ search, setSearch, postings, setPostings }) => {
           placeholder="search"
           name="search"
         />
-        {/* <button type="submit">Search</button> */}
+        <button type="submit">Search</button>
       </form>
-
-      <div>
-        {searchResults.map((searchResult) => {
-          return (
-            <div key={searchResult._id}>
-              <h2>{searchResult.title}</h2>
-              <h4>Description: {searchResult.description}</h4>
-              <h4>Price :{searchResult.price}</h4>
-              <h4>Location: {searchResult.location}</h4>
-              {/* {searchResult.author._id !== profile._id ? null : (
-                <Link
-                  to={{ pathname: "/editPost", state: { post: searchResult } }}
-                >
-                  <button value={searchResult._id} type="submit">
-                    Edit Post
-                  </button>
-                </Link>
-              )}
-              {searchResult.author._id !== profile._id ? null : (
-                <button type="submit">Delete Post</button> */}
-              {/* )} */}
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 };

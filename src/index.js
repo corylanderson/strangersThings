@@ -26,7 +26,7 @@ const App = () => {
   const [postings, setPostings] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState("");
-  const [search, setSearch] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState(postings);
 
   useEffect(() => {
     const currentToken = localStorage.getItem("token");
@@ -49,12 +49,7 @@ const App = () => {
     <div id="app">
       <div id="app-control">
         <Navbar />
-        <Search
-          search={search}
-          setSearch={setSearch}
-          postings={postings}
-          setPostings={setPostings}
-        />
+        <Search postings={postings} setFilteredPosts={setFilteredPosts} />
         <h1>Stranger's Things!!!</h1>
 
         {isLoggedIn ? (
@@ -73,6 +68,7 @@ const App = () => {
             setPostings={setPostings}
             profile={profile}
             setProfile={setProfile}
+            filteredPosts={filteredPosts}
           />
         </Route>
         <Route path="/createPost">

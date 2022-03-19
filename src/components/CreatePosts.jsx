@@ -26,7 +26,6 @@ const CreatePosts = ({ token, setToken }) => {
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
-
   };
   const handleDescription = (e) => {
     setDescription(e.target.value);

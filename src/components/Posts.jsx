@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { fetchPostings, deletePost } from "../api";
 import { Link } from "react-router-dom";
 
-const Posts = ({ postings, setPostings, profile, setProfile }) => {
-  console.log(postings);
+const Posts = ({
+  postings,
+  setPostings,
+  profile,
+  setProfile,
+  filteredPosts,
+}) => {
   useEffect(() => {
     const getPosts = async () => {
       const results = await fetchPostings();
@@ -26,13 +31,12 @@ const Posts = ({ postings, setPostings, profile, setProfile }) => {
     const results = await fetchPostings();
     setPostings(results.data.posts);
   };
-  console.log(localStorage.getItem("token"));
   return (
     <div id="postMain">
       <Link to="createPost">
         <button type="submit">Create Post</button>
       </Link>
-      {postings.map((posting) => {
+      {filteredPosts.map((posting) => {
         return (
           <div className="post" key={posting._id}>
             <h2>{posting.title}</h2>
