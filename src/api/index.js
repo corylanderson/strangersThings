@@ -56,7 +56,7 @@ const fetchUserProfile = async (token) => {
   return data;
 };
 
-const createPost = async (postDetails, token) => {
+const createAPost = async (postDetails, token) => {
   const result = await fetch(`${BaseURL}/posts`, {
     method: "POST",
     headers: {
@@ -131,13 +131,13 @@ const sendingMessage = async (token, messageContent, postId) => {
   return data;
 };
 
-module.exports = {
+export {
   fetchPostings,
   fetchLogin,
   fetchRegisterUser,
-  createPost,
   updatePost,
   fetchUserProfile,
   deletePost,
   sendingMessage,
+  createAPost,
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createPost } from "../api";
+import { createAPost }  from "../api";
 
 const CreatePosts = ({ token, setToken }) => {
   const [title, setTitle] = useState("");
@@ -19,7 +19,7 @@ const CreatePosts = ({ token, setToken }) => {
     };
 
     const creatingPost = async () => {
-      await createPost(postDetails, localStorage.getItem("token"));
+      await createAPost(postDetails, localStorage.getItem("token"));
     };
     creatingPost();
   };
