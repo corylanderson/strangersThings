@@ -100,7 +100,7 @@ const updatePost = async (updateObj, token, postId) => {
   return data;
 };
 
-const deletePost = async (postId, token) => {
+const deletePost = async (token, postId) => {
   const result = await fetch(`${BaseURL}/posts/${postId}`, {
     method: "DELETE",
     headers: {
@@ -113,6 +113,24 @@ const deletePost = async (postId, token) => {
   return data;
 };
 
+const sendingMessage = async (token, messageContent, postId) => {
+  const result = await fetch(`${BaseURL}/posts/${postId}/messages`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      message: {
+        content: messageContent,
+      },
+    }),
+  });
+  const data = await result.json();
+  console.log(data, "you sent a message");
+  return data;
+};
+
 module.exports = {
   fetchPostings,
   fetchLogin,
@@ -121,4 +139,5 @@ module.exports = {
   updatePost,
   fetchUserProfile,
   deletePost,
+  sendingMessage,
 };

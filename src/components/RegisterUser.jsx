@@ -18,6 +18,7 @@ const RegisterUser = ({
       e.target[0].value,
       e.target[1].value
     );
+    console.log(userProfile);
     let storageToken = await userProfile.data.token;
 
     localStorage.setItem("token", storageToken);
@@ -25,12 +26,10 @@ const RegisterUser = ({
   };
   const handleUsername = (e) => {
     setUsername(e.target.value);
-
   };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-
   };
 
   return (

@@ -21,13 +21,12 @@ const Search = ({ postings, setFilteredPosts }) => {
       }
     });
     setFilteredPosts(searchResults);
-    console.log(searchResults, "this is search results from handle submit");
   };
   return (
     <div>
       <form onSubmit={handleSubmit} method="get">
         <label htmlFor="header-search">
-          <span className="visually-hidden">Search Postings</span>
+          <span className="visually-hidden"></span>
         </label>
         <input
           onChange={(e) => {
@@ -35,7 +34,7 @@ const Search = ({ postings, setFilteredPosts }) => {
           }}
           type="text"
           id="header-search"
-          placeholder="search"
+          placeholder="search postings"
           name="search"
         />
         <button type="submit">Search</button>

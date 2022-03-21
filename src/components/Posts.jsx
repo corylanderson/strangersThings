@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchPostings, deletePost } from "../api";
+import { fetchPostings } from "../api";
 import { Link } from "react-router-dom";
 
 const Posts = ({
@@ -8,6 +8,7 @@ const Posts = ({
   profile,
   setProfile,
   filteredPosts,
+  deletingPosts,
 }) => {
   useEffect(() => {
     const getPosts = async () => {
@@ -23,14 +24,7 @@ const Posts = ({
   // return (<Route
   //   CreatePosts />)
   // }
-  const deletingPosts = async (e) => {
-    const result = await deletePost(
-      localStorage.getItem("token"),
-      e.target.value
-    );
-    const results = await fetchPostings();
-    setPostings(results.data.posts);
-  };
+
   return (
     <div id="postMain">
       <Link to="createPost">
@@ -40,22 +34,50 @@ const Posts = ({
         return (
           <div className="post" key={posting._id}>
             <h2>{posting.title}</h2>
-            <h4>Description: {posting.description}</h4>
+            <h4 class="description">Description: {posting.description}</h4>
             <h4>Price :{posting.price}</h4>
             <h4>Location: {posting.location}</h4>
 
-            {posting.author._id !== profile._id ? null : (
-              <Link to={{ pathname: "/editPost", state: { post: posting } }}>
+            {posting.author._id !== profile._id ? (
+              <Link to={{ pathname: "/sendMessage", state: { post: posting } }}>
                 <button value={posting._id} type="submit">
-                  Edit Post
+                  Send Message
                 </button>
               </Link>
+            ) : (
+              <div>
+                <Link to={{ pathname: "/editPost", state: { post: posting } }}>
+                  <button value={posting._id} type="submit">
+                    Edit Post
+                  </button>
+                </Link>
+                <button
+                  value={posting._id}
+                  type="submit"
+                  onClick={(e) => {
+                    deletingPosts(e);
+                  }}
+                >
+                  Delete Post
+                </button>
+              </div>
             )}
-            {posting.author._id !== profile._id ? null : (
-              <button value={posting._id} type="submit" onClick={deletingPosts}>
+            {/* {posting.author._id === profile._id ? (
+              <button
+                value={posting._id}
+                type="submit"
+                onClick={
+                  () => {
+                    console.log("click");
+                  }
+                  // deletingPosts();
+                }
+              >
                 Delete Post
               </button>
-            )}
+            ) : (
+              null()
+            )} */}
           </div>
         );
       })}

@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { fetchUserProfile, fetchPostings } from "./api";
+import { fetchUserProfile, fetchPostings, deletePost } from "./api";
 import {
   Login,
   RegisterUser,
@@ -17,6 +17,7 @@ import {
   Navbar,
   EditSinglePost,
   Search,
+  Message,
 } from "./components";
 
 const App = () => {
@@ -55,6 +56,21 @@ const App = () => {
     setFilteredPosts(postings);
   }, [postings]);
 
+  const deletingPosts = async (e) => {
+    const result = await deletePost(
+      localStorage.getItem("token"),
+      e.target.value
+    );
+    const results = await fetchPostings();
+    setPostings(results.data.posts);
+    console.log(results.data.posts);
+
+    const profileResults = await fetchUserProfile(
+      localStorage.getItem("token")
+    );
+    setProfile(profileResults);
+  };
+
   return (
     <div id="app">
       <div id="app-control">
@@ -79,6 +95,7 @@ const App = () => {
             profile={profile}
             setProfile={setProfile}
             filteredPosts={filteredPosts}
+            deletingPosts={deletingPosts}
           />
         </Route>
         <Route path="/createPost">
@@ -90,6 +107,8 @@ const App = () => {
             setToken={setToken}
             profile={profile}
             setProfile={setProfile}
+            deletingPosts={deletingPosts}
+            postings={postings}
           />
         </Route>
         <Route path="/createUser">
@@ -115,6 +134,9 @@ const App = () => {
         </Route>
         <Route path="/editPost">
           <EditSinglePost />
+        </Route>
+        <Route path="/sendMessage">
+          <Message />
         </Route>
       </Switch>
     </div>
